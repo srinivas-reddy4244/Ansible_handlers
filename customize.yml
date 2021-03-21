@@ -1,0 +1,29 @@
+---
+- hosts: 192.168.1.56
+  tasks:
+          - package:
+                  name: "httpd"
+                  state: present
+          - file:
+                  state: directory
+                  path: "/var/www/cnu"
+
+          - copy:
+                  content: "Welcome to world of Automation"
+                  dest: "/var/www/cnu/index.html"
+          - copy:
+                  src: "/root/yum/ApacheCustomize/listen.conf"
+                  dest: "/etc/httpd/conf.d/"
+            notify: service restart
+
+  handlers:        
+          - name: service restart         
+            service:
+                  name: "httpd"
+                  state: restarted
+          - firewalld:
+                  port: 8080/tcp
+                  state: enabled
+                  permanent: yes
+                  immediate: yes
+                  

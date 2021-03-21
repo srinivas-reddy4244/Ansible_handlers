@@ -1,0 +1,25 @@
+---
+- hosts: 192.168.1.56
+  tasks:
+           - file:
+                   name: "creating directory"
+                   state: directory
+                   path: "/DVD"
+           - mount:
+                   src: "/dev/sr0"
+                   path: "/DVD"
+                   state: mounted
+                   fstype: "iso9660" 
+           - yum_repository:
+                   baseurl: "/DVD/AppStream"
+                   name: "AppStream"
+                   description: "appstream"
+                   gpgcheck: no
+           - yum_repository:
+                   baseurl: "/DVD/BaseOS"
+                   name: "BaseOS"
+                   description: "description"
+                   gpgcheck: no
+
+
+
