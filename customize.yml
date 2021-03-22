@@ -22,7 +22,7 @@
                   name: "httpd"
                   state: restarted
           - firewalld:
-                  port: 8080/tcp
+                  port: 8443/tcp
                   state: enabled
                   permanent: yes
                   immediate: yes
